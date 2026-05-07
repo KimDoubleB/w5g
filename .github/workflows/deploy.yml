@@ -1,0 +1,79 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        env:
+          # Personal info — set these as Repository Secrets
+          # (Settings → Secrets and variables → Actions → New repository secret)
+          # Any secret left unset becomes empty string at build time, so the
+          # corresponding section will display TODO/empty placeholders.
+          VITE_PHONE_GROOM: ${{ secrets.VITE_PHONE_GROOM }}
+          VITE_PHONE_GROOM_FATHER: ${{ secrets.VITE_PHONE_GROOM_FATHER }}
+          VITE_PHONE_GROOM_MOTHER: ${{ secrets.VITE_PHONE_GROOM_MOTHER }}
+          VITE_PHONE_BRIDE: ${{ secrets.VITE_PHONE_BRIDE }}
+          VITE_PHONE_BRIDE_FATHER: ${{ secrets.VITE_PHONE_BRIDE_FATHER }}
+          VITE_PHONE_BRIDE_MOTHER: ${{ secrets.VITE_PHONE_BRIDE_MOTHER }}
+
+          VITE_ACCT_GROOM_BANK: ${{ secrets.VITE_ACCT_GROOM_BANK }}
+          VITE_ACCT_GROOM_NUMBER: ${{ secrets.VITE_ACCT_GROOM_NUMBER }}
+          VITE_ACCT_GROOM_FATHER_BANK: ${{ secrets.VITE_ACCT_GROOM_FATHER_BANK }}
+          VITE_ACCT_GROOM_FATHER_NUMBER: ${{ secrets.VITE_ACCT_GROOM_FATHER_NUMBER }}
+          VITE_ACCT_GROOM_MOTHER_BANK: ${{ secrets.VITE_ACCT_GROOM_MOTHER_BANK }}
+          VITE_ACCT_GROOM_MOTHER_NUMBER: ${{ secrets.VITE_ACCT_GROOM_MOTHER_NUMBER }}
+
+          VITE_ACCT_BRIDE_BANK: ${{ secrets.VITE_ACCT_BRIDE_BANK }}
+          VITE_ACCT_BRIDE_NUMBER: ${{ secrets.VITE_ACCT_BRIDE_NUMBER }}
+          VITE_ACCT_BRIDE_FATHER_BANK: ${{ secrets.VITE_ACCT_BRIDE_FATHER_BANK }}
+          VITE_ACCT_BRIDE_FATHER_NUMBER: ${{ secrets.VITE_ACCT_BRIDE_FATHER_NUMBER }}
+          VITE_ACCT_BRIDE_MOTHER_BANK: ${{ secrets.VITE_ACCT_BRIDE_MOTHER_BANK }}
+          VITE_ACCT_BRIDE_MOTHER_NUMBER: ${{ secrets.VITE_ACCT_BRIDE_MOTHER_NUMBER }}
+
+          VITE_MAP_NAVER: ${{ secrets.VITE_MAP_NAVER }}
+          VITE_MAP_KAKAO: ${{ secrets.VITE_MAP_KAKAO }}
+          VITE_MAP_TMAP: ${{ secrets.VITE_MAP_TMAP }}
+        run: npm run build
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
