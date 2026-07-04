@@ -213,6 +213,7 @@ img { display: block; max-width: 100%; }
 .location__address { font-size: 13px; color: var(--muted); margin-top: 4px; }
 .location__map {
   margin: 0 var(--pad-x) 16px;
+  position: relative;
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--line);
@@ -220,15 +221,22 @@ img { display: block; max-width: 100%; }
   background: var(--surface);
 }
 .location__map-placeholder {
-  height: 100%;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 4px;
+  padding: 18px;
+  text-align: center;
+  background: var(--surface);
   color: var(--muted);
   font-size: 13px;
 }
+.location__map.is-ready { background: #e8efeb; }
+.location__map.is-error { background: var(--surface); }
 .location__map-note { font-size: 11px; opacity: 0.7; }
 .location__nav-btns {
   display: grid;

@@ -27,6 +27,7 @@ interface ImportMetaEnv {
   readonly VITE_MAP_NAVER?: string;
   readonly VITE_MAP_KAKAO?: string;
   readonly VITE_MAP_TMAP?: string;
+  readonly VITE_NAVER_MAP_NCP_KEY_ID?: string;
 }
 
 interface ImportMeta {

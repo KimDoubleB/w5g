@@ -58,6 +58,7 @@ jobs:
           VITE_MAP_NAVER: ${{ secrets.VITE_MAP_NAVER }}
           VITE_MAP_KAKAO: ${{ secrets.VITE_MAP_KAKAO }}
           VITE_MAP_TMAP: ${{ secrets.VITE_MAP_TMAP }}
+          VITE_NAVER_MAP_NCP_KEY_ID: ${{ secrets.VITE_NAVER_MAP_NCP_KEY_ID }}
         run: npm run build
 
       - name: Configure Pages
