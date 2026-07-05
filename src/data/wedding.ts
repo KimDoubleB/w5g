@@ -61,7 +61,7 @@ export const WEDDING: WeddingData = {
     name: 'aT포레 웨딩홀',
     address: '서울특별시 서초구 강남대로 27 (양재동 232번지)',
     // TODO: 실제 좌표 입력 (필요 시)
-    coords: { lat: 37.4699, lng: 127.0379 },
+    coords: { lat: 37.4681770, lng: 127.0391750 },
     mapLinks: {
       naver: env('VITE_MAP_NAVER') || '#TODO_NAVER_MAP_URL',
       kakao: env('VITE_MAP_KAKAO') || '#TODO_KAKAO_MAP_URL',
