@@ -136,7 +136,7 @@ export const WEDDING: WeddingData = {
   ],
 };
 
-export const GALLERY_COUNT = 20;
+export const GALLERY_COUNT = 15;
 
 /** Image extension for hero/gallery files under `public/img/`. */
 export const IMG_EXT = 'jpg' as const;
