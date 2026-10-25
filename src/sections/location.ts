@@ -1,6 +1,7 @@
 import { ARROW_DOWN_SVG, makeCollapsible } from '../components/collapsible';
 import { WEDDING } from '../data/wedding';
 import { initializeNaverMap } from '../map/naverMap';
+import { copyButton } from '../components/copyButton';
 
 const SUBWAY_ICON = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M7 14h10"/><circle cx="9" cy="11" r=".8"/><circle cx="15" cy="11" r=".8"/><path d="M8 17l-2 4M16 17l2 4"/></svg>';
 const BUS_ICON = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="13" rx="2"/><path d="M4 11h16"/><circle cx="8" cy="17.5" r="1.4"/><circle cx="16" cy="17.5" r="1.4"/></svg>';
@@ -63,9 +64,10 @@ function renderWayItem(opts: { id: string; icon: string; title: string; bodyHtml
   `;
 }
 
-export function renderLocation(): HTMLElement {
+export function renderLocation(weddingDay = false): HTMLElement {
   const section = document.createElement('section');
   section.className = 'section location';
+  section.id = 'location';
 
   const subwayBody = `<ul>${WEDDING.ways.subway.map((s) => `<li>${s}</li>`).join('')}</ul>`;
   const carBody = `<ul>${WEDDING.ways.car.map((s) => `<li>${s}</li>`).join('')}</ul>`;
@@ -108,7 +110,13 @@ export function renderLocation(): HTMLElement {
     </div>
   `;
 
-  section.querySelectorAll<HTMLElement>('.way-item').forEach((el) => makeCollapsible(el));
+  if (weddingDay) {
+    const addressCopy = copyButton(WEDDING.venue.address, '주소 복사', '주소가 복사되었습니다');
+    section.querySelector('.location__venue')!.append(addressCopy);
+  }
+  section.querySelectorAll<HTMLElement>('.way-item').forEach((el) =>
+    makeCollapsible(el, { openByDefault: weddingDay && el.id === 'way-subway' }),
+  );
   initLocationMap(section);
   return section;
 }

@@ -103,7 +103,7 @@ img { display: block; max-width: 100%; }
 }
 .hero__meta {
   margin-top: 22px;
-  font-size: 14px;
+  font-size: 16px;
   color: var(--text);
   line-height: 2;
 }
@@ -145,6 +145,51 @@ img { display: block; max-width: 100%; }
   cursor: pointer;
 }
 .btn-contact:active { background: var(--surface); }
+
+/* ---------- Wedding day: a shorter path to guest information ---------- */
+.is-wedding-day .section { padding: 36px var(--pad-x); }
+.is-wedding-day .section__name { margin: 0; }
+.is-wedding-day .section__title { margin-bottom: 22px; }
+.wedding-day-greeting {
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(234, 196, 196, 0.3), transparent 65%),
+    radial-gradient(ellipse at 100% 12%, rgba(241, 223, 191, 0.3), transparent 60%),
+    linear-gradient(to bottom, #fcf7f4, #fff 90%);
+}
+.is-wedding-day .wedding-day-greeting { padding-top: 64px; }
+.wedding-day-greeting__names {
+  margin: 24px 0 32px;
+}
+.wedding-day-greeting__meta { margin-top: 20px; font-size: 18px; line-height: 2; }
+.wedding-day-greeting__meta .eng { font-size: 20px; }
+.wedding-day-greeting .invitation__message { font-size: 14px; }
+.wedding-day-greeting__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 10px 22px;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 14px;
+}
+.is-wedding-day .location { background: #faf9f7; scroll-margin-top: 16px; }
+.is-wedding-day .location__venue .btn-copy { margin-top: 12px; min-height: 44px; }
+.is-wedding-day .location__map { margin-inline: 0; }
+.is-wedding-day .location__nav-btns,
+.is-wedding-day .location__ways,
+.is-wedding-day .account__list { padding-inline: 0; }
+.wedding-day-contacts { text-align: center; }
+.wedding-day-contacts p { font-size: 14px; margin: 0; }
+.wedding-day-contacts .btn-contact { color: var(--text); min-height: 44px; padding-inline: 18px; }
+.is-thank-you { background: linear-gradient(to bottom, #fcf7f4, #fff 85%); }
+.is-thank-you .thank-you-greeting { padding-top: 80px; padding-bottom: 48px; }
+.thank-you-greeting .invitation__message { line-height: 2.2; }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
 
 /* ---------- Calendar ---------- */
 .calendar { padding: 30px 0; }

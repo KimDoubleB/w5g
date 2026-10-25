@@ -14,6 +14,7 @@ dist-ssr/
 # --- Vite / Vitest cache ---
 .vite/
 .vitest/
+.tmp-test/
 coverage/
 
 # --- Logs ---

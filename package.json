@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "test": "rm -rf .tmp-test && tsc -p tsconfig.test.json && node --test .tmp-test/naverMap.test.js",
+    "test": "rm -rf .tmp-test && tsc -p tsconfig.test.json && node --test .tmp-test/map/naverMap.test.js .tmp-test/weddingDay.test.js",
     "preview": "vite preview",
     "resize-images": "node scripts/resize-images.mjs"
   },

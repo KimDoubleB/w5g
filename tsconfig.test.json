@@ -7,5 +7,5 @@
     "outDir": ".tmp-test",
     "types": ["node"]
   },
-  "include": ["src/map/naverMap.ts", "src/map/naverMap.test.ts"]
+  "include": ["src/map/naverMap.ts", "src/map/naverMap.test.ts", "src/weddingDay.ts", "src/weddingDay.test.ts"]
 }

@@ -1,6 +1,6 @@
 import { copyText, showToast } from '../utils/clipboard';
 
-export function copyButton(text: string, label = '복사'): HTMLButtonElement {
+export function copyButton(text: string, label = '복사', successMessage = '계좌번호가 복사되었습니다'): HTMLButtonElement {
   const btn = document.createElement('button');
   btn.type = 'button';
   btn.className = 'btn-copy';
@@ -18,7 +18,7 @@ export function copyButton(text: string, label = '복사'): HTMLButtonElement {
       return;
     }
     const ok = await copyText(text);
-    showToast(ok ? '계좌번호가 복사되었습니다' : '복사에 실패했어요. 직접 선택해 복사해주세요');
+    showToast(ok ? successMessage : '복사에 실패했어요. 직접 선택해 복사해주세요');
   });
   return btn;
 }
