@@ -3,7 +3,7 @@ import { ddayLine, formatDateLine, formatTimeKorean, koreanWeekday } from '../ut
 
 const HEADERS = ['일', '월', '화', '수', '목', '금', '토'];
 
-export function renderCalendar(): HTMLElement {
+export function renderCalendar(now: Date = new Date()): HTMLElement {
   const section = document.createElement('section');
   section.className = 'calendar';
 
@@ -27,10 +27,14 @@ export function renderCalendar(): HTMLElement {
     const row = cells
       .slice(i, i + 7)
       .map((cell) => {
+        const isToday = year === now.getFullYear()
+          && month === now.getMonth()
+          && cell.label === String(now.getDate());
         const cls = ['calendar__cell'];
         if (cell.dow === 0) cls.push('is-sun');
         if (cell.isTarget) cls.push('is-target');
-        return `<td class="${cls.join(' ')}">${cell.label ? `<span>${cell.label}</span>` : ''}</td>`;
+        if (isToday) cls.push('is-today');
+        return `<td class="${cls.join(' ')}"${isToday ? ' aria-current="date"' : ''}>${cell.label ? `<span>${cell.label}</span>` : ''}${isToday ? '<small class="calendar__today-label">오늘</small>' : ''}</td>`;
       })
       .join('');
     rowsHtml.push(`<tr>${row}</tr>`);
@@ -41,6 +45,7 @@ export function renderCalendar(): HTMLElement {
       <div class="calendar__header">
         <div class="eng calendar__date">${formatDateLine(d)}</div>
         <div class="calendar__sub">${koreanWeekday(d)} ${formatTimeKorean(d)}</div>
+        <div class="calendar__today">오늘 ${formatDateLine(now)}</div>
       </div>
       <table class="calendar__table">
         <thead>
@@ -49,7 +54,7 @@ export function renderCalendar(): HTMLElement {
         <tbody>${rowsHtml.join('')}</tbody>
       </table>
       <div class="calendar__divider"></div>
-      <div class="calendar__dday">${ddayLine(d, { groom: WEDDING.groom.name.slice(1), bride: WEDDING.bride.name.slice(1) })}</div>
+      <div class="calendar__dday">${ddayLine(d, { groom: WEDDING.groom.name.slice(1), bride: WEDDING.bride.name.slice(1) }, now)}</div>
     </div>
   `;
   return section;
