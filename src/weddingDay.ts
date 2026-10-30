@@ -15,8 +15,9 @@ export function getWeddingPageMode(
     return ['year', 'month', 'day'].map((type) => parts.find((p) => p.type === type)!.value).join('-');
   };
   const weddingDay = dayKey(wedding);
+  const weddingDayStart = dayKey(new Date(wedding.getTime() - 24 * 60 * 60 * 1000));
   const today = dayKey(now);
-  if (today < weddingDay) return 'invitation';
-  if (today === weddingDay) return 'wedding-day';
+  if (today < weddingDayStart) return 'invitation';
+  if (today <= weddingDay) return 'wedding-day';
   return 'thank-you';
 }

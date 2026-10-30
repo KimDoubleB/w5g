@@ -4,8 +4,10 @@ import { getWeddingPageMode } from './weddingDay.js';
 
 const wedding = new Date('2026-10-31T14:00:00+09:00');
 
-test('uses the entire wedding day in Seoul, including both midnight boundaries', () => {
-  assert.equal(getWeddingPageMode(wedding, new Date('2026-10-30T14:59:59.999Z')), 'invitation');
+test('shows the wedding-day page from the day before through the wedding day in Seoul', () => {
+  assert.equal(getWeddingPageMode(wedding, new Date('2026-10-29T14:59:59.999Z')), 'invitation');
+  assert.equal(getWeddingPageMode(wedding, new Date('2026-10-29T15:00:00Z')), 'wedding-day');
+  assert.equal(getWeddingPageMode(wedding, new Date('2026-10-30T14:59:59.999Z')), 'wedding-day');
   assert.equal(getWeddingPageMode(wedding, new Date('2026-10-30T15:00:00Z')), 'wedding-day');
   assert.equal(getWeddingPageMode(wedding, new Date('2026-10-31T14:59:59.999Z')), 'wedding-day');
   assert.equal(getWeddingPageMode(wedding, new Date('2026-10-31T15:00:00Z')), 'thank-you');
