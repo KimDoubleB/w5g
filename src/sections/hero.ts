@@ -31,7 +31,7 @@ export function renderHero(): HTMLElement {
       </div>
       <div class="hero__meta">
         <div class="eng">${y}.${Number(m)}.${Number(day)} (${weekday}) ${hour12}:${minStr} ${ampm}</div>
-        <div>${WEDDING.venue.name}</div>
+        <div>${WEDDING.venue.name} (5층)</div>
       </div>
     </div>
   `;

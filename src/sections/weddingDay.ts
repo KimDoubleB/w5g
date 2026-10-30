@@ -32,7 +32,7 @@ export function renderWeddingDayGreeting(): HTMLElement {
       <h1 class="section__name">오늘, 저희 결혼합니다</h1>
       <div class="wedding-day-greeting__meta">
         <div class="eng">${date} (${weekday}) ${time}</div>
-        <div>${WEDDING.venue.name}</div>
+        <div>${WEDDING.venue.name} (5층)</div>
       </div>
     </div>
     <div class="invitation__message">

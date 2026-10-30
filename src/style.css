@@ -176,7 +176,7 @@ img { display: block; max-width: 100%; }
   font-size: 14px;
 }
 .is-wedding-day .location { background: #faf9f7; scroll-margin-top: 16px; }
-.is-wedding-day .location__venue .btn-copy { margin-top: 12px; min-height: 44px; }
+.is-wedding-day .location__address .btn-copy { display: inline-flex; margin-left: 4px; padding: 3px 7px; color: var(--text); border-color: #bcbcbc; font-size: 12px; font-weight: 700; vertical-align: middle; }
 .is-wedding-day .location__map { margin-inline: 0; }
 .is-wedding-day .location__nav-btns,
 .is-wedding-day .location__ways,
@@ -329,6 +329,7 @@ img { display: block; max-width: 100%; }
 
 .location__ways {
   padding: 0 var(--pad-x);
+  margin-bottom: 28px;
   display: flex;
   flex-direction: column;
   gap: 10px;

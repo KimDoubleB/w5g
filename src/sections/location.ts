@@ -20,7 +20,7 @@ const showMapFallback = (mapEl: HTMLElement): void => {
 
   placeholder.innerHTML = `
     <div>지도를 표시할 수 없습니다</div>
-    <div class="location__map-note">아래 지도 앱 버튼을 이용해 주세요</div>
+    <div class="location__map-note">위의 지도 앱 버튼을 이용해 주세요</div>
   `;
 };
 
@@ -92,30 +92,30 @@ export function renderLocation(weddingDay = false): HTMLElement {
       <div class="location__name">${WEDDING.venue.name}</div>
       <div class="location__address">${WEDDING.venue.address}</div>
     </div>
-    <div class="location__map" data-naver-map>
-      <div class="location__map-placeholder" data-map-placeholder>
-        <div>지도를 불러오는 중</div>
-        <div class="location__map-note">표시되지 않으면 아래 지도 앱 버튼을 이용해 주세요</div>
-      </div>
+    <div class="location__ways">
+      ${renderWayItem({ id: 'way-car', icon: CAR_ICON, title: '자가용', bodyHtml: carBody })}
+      ${renderWayItem({ id: 'way-subway', icon: SUBWAY_ICON, title: '지하철', bodyHtml: subwayBody })}
+      ${renderWayItem({ id: 'way-bus', icon: BUS_ICON, title: '버스', bodyHtml: busBody })}
     </div>
     <div class="location__nav-btns">
       <a class="nav-btn" href="${WEDDING.venue.mapLinks.naver}" target="_blank" rel="noopener">${NAVER_ICON}<span>네이버 지도</span></a>
       <a class="nav-btn" href="${WEDDING.venue.mapLinks.kakao}" target="_blank" rel="noopener">${KAKAO_ICON}<span>카카오맵</span></a>
       <a class="nav-btn" href="${WEDDING.venue.mapLinks.tmap}" target="_blank" rel="noopener">${TMAP_ICON}<span>티맵</span></a>
     </div>
-    <div class="location__ways">
-      ${renderWayItem({ id: 'way-subway', icon: SUBWAY_ICON, title: '지하철', bodyHtml: subwayBody })}
-      ${renderWayItem({ id: 'way-bus', icon: BUS_ICON, title: '버스', bodyHtml: busBody })}
-      ${renderWayItem({ id: 'way-car', icon: CAR_ICON, title: '자가용', bodyHtml: carBody })}
+    <div class="location__map" data-naver-map>
+      <div class="location__map-placeholder" data-map-placeholder>
+        <div>지도를 불러오는 중</div>
+        <div class="location__map-note">표시되지 않으면 위의 지도 앱 버튼을 이용해 주세요</div>
+      </div>
     </div>
   `;
 
   if (weddingDay) {
     const addressCopy = copyButton(WEDDING.venue.address, '주소 복사', '주소가 복사되었습니다');
-    section.querySelector('.location__venue')!.append(addressCopy);
+    section.querySelector('.location__address')!.append(' ', addressCopy);
   }
   section.querySelectorAll<HTMLElement>('.way-item').forEach((el) =>
-    makeCollapsible(el, { openByDefault: weddingDay && el.id === 'way-subway' }),
+    makeCollapsible(el, { openByDefault: el.id === 'way-car' }),
   );
   initLocationMap(section);
   return section;
